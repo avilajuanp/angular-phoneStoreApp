@@ -1,0 +1,41 @@
+<h2>Nuestros Productos</h2>
+
+<!--
+  create the Product list, using *ngFor to repeat each product of the list
+-->
+<div *ngFor="let product of products">
+  <!--
+    {{ product.name }} statement is an example of Angular's interpolation syntax. Interpolation {{ }} lets you render the property value as text.
+  -->
+  <h3>
+    <!--
+      To make each product name a link to product details, add the <a> element around {{ product.name }}. Set the title to be the product's name by using the property binding [ ] syntax
+    -->
+    <a [title]="product.name + ' details'">
+      {{ product.name }}
+    </a>
+  </h3>
+
+  <!--
+    use an *ngIf directive so that Angular only creates the <p> element if the current product has a description.
+  -->
+  <p *ngIf="product.description">Descripción: {{ product.description }}</p>
+
+  <!--
+    Bind the button's click event to the share() method in product-list.component.ts. Event binding uses a set of parentheses, ( ), around the event, as in the (click) event on the <button> element.
+  -->
+  <button type="button" (click)="share()">Compartir teléfono</button>
+
+  <!--
+    to display ProductAlertsComponent as a child of ProductListComponent, add the <app-product-alerts> element to product-list.component.html. Pass the current product as input to the component using property binding.
+    bind <app-product-alerts> to the onNotify() method of the product list component. <app-product-alerts> is what displays the Notify Me button.
+  -->
+  <app-product-alerts [product]="product" (notify)="onNotify()">
+  </app-product-alerts>
+</div>
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->
